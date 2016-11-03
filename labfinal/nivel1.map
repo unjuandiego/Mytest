@@ -1,0 +1,161 @@
+[nivel]
+origen=im.png
+alto=32
+ancho=32
+mapa=................................
+     .*############################$.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ._ssssssssssssssssssssssssssss!.
+     ./%%%%%%%%%%%%%%%%%%%%%%%%%%%%|.
+     ................................
+[.]
+nombre=bloque
+x=8
+y=14
+muro= si
+muere = no
+letra = no
+llave = no
+
+[s]
+nombre=selva
+x= 7
+y= 12
+muro=no
+muere = no
+letra = no
+llave = no
+
+[,]
+nombre=puerta salida
+x=11
+y=13
+verdadera=False
+muro=no
+llave= si
+muere = no
+letra = no
+
+[;]
+nombre=puerta salida
+x=11
+y=13
+verdadera=True
+muro=no
+llave=si
+muere = no
+letra = no
+
+[<]
+nombre=lava
+x=7
+y=8
+muro=no
+muere = si
+letra = no
+llave = no
+
+[p]
+nombre=piedra
+x=2
+y=15
+muro=si
+muere = no
+letra = no
+llave = no
+
+[*]
+nombre=borde1
+x=8
+y=13
+muro=no
+muere = no
+letra = no
+llave = no
+
+[#]
+nombre=borde2
+x=9
+y=13
+muro=no
+muere = no
+letra = no
+llave = no
+
+[$]
+nombre=borde3
+x=10
+y=13
+muro=no
+muere = no
+letra = no
+llave = no
+
+[!]
+nombre=borde4
+x=10
+y=14
+muro=no
+muere = no
+letra = no
+llave = no
+
+[|]
+nombre=borde5
+x=10
+y=15
+muro=no
+muere = no
+letra = no
+llave = no
+
+[%]
+nombre=borde6
+x=9
+y=15
+muro=no
+muere = no
+letra = no
+llave = no
+
+[/]
+nombre=borde7
+x=8
+y=15
+muro=no
+muere = no
+letra = no
+llave = no
+
+[_]
+nombre=borde8
+x=8
+y=14
+muro=no
+muere = no
+letra = no
+llave = no
+
+[r]
+nombre=rellen
+x=7
+y=8
+muro=si
+muere = si
+letra = no
+llave = no
