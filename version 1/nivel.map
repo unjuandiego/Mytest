@@ -1,0 +1,176 @@
+[nivel]
+origen=im.png
+alto=32
+ancho=32
+mapa=................................
+     .*p###ppppp##p##pppppppppp####$.
+     ._pppssssspsppsssssssss<<pspss!.
+     ._sspppppspsspspppppssss<pspsp!.
+     ._ssp<<pssssppsp<<<pssssspspsps,
+     ._ssssspppssspsp<<<pssssspspsp!.
+     ._ssspsspsssppspp<ppsssss<spsp!.
+     ._ppppppppsssppppsspssssssspsp!.
+     ._pssspssssssprrpsspssppppppsp!.
+     ._pssssspssssprrpsspsssspsspsp!.
+     ._ppppppppspsprrpsspssssssspspp.
+     ._sssss<<pspsppppsspspppppspss!.
+     .ppsspppppspssssssspspspspspsp!.
+     ._psspssssspspppppspspspspspsp!.
+     ._ssspssspppsppsspspspssspspsp!.
+     ._ssssssspsssppsppspppssspspsp!.
+     ._psppppppssspssspssssspspppsp!.
+     ._pspsssssssspssspsssss<sssssps;
+     ._psppppppppppsppp<sspppsssssp!.
+     ./p%%%%%%%%%%%%%%p%%%%%%%%%%%p|.
+     ................................
+[.]
+nombre=bloque
+x=8
+y=14
+muro= si
+muere = no
+letra = no
+llave = no
+puerta=no
+
+[s]
+nombre=selva
+x= 5
+y= 3
+muro=no
+muere = no
+letra = no
+llave = no
+puerta=no
+
+[,]
+nombre=puerta salida
+x=11
+y=13
+verdadera=False
+muro=no
+llave= si
+muere = no
+letra = no
+puerta= si
+
+[;]
+nombre=puerta salida
+x=11
+y=13
+verdadera=True
+muro=no
+llave=si
+muere = no
+letra = no
+puerta= no
+
+[<]
+nombre=lava
+x=7
+y=8
+muro=no
+muere = si
+letra = no
+llave = no
+puerta= no
+
+[p]
+nombre=piedra
+x=2
+y=15
+muro=si
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[*]
+nombre=borde1
+x=8
+y=3
+muro=no
+muere = no
+letra = no
+llave = no
+puerta=no
+
+[#]
+nombre=borde2
+x=10
+y=3
+muro=no
+muere = no
+letra = no
+llave = no
+puerta=no
+
+[$]
+nombre=borde3
+x=11
+y=3
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[!]
+nombre=borde4
+x=11
+y=4
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[|]
+nombre=borde5
+x=11
+y=6
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[%]
+nombre=borde6
+x=9
+y=6
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[/]
+nombre=borde7
+x=8
+y=6
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[_]
+nombre=borde8
+x=8
+y=4
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[r]
+nombre=rellen
+x=7
+y=8
+muro=si
+muere = si
+letra = no
+llave = no
+puerta= no
