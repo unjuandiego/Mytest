@@ -2,6 +2,7 @@ import pygame
 import ConfigParser
 from lib import *
 import random
+import time
 
 ANCHO=1020
 ALTO=670
@@ -83,6 +84,18 @@ class J(pygame.sprite.Sprite):
     def __init__(self,x,y,archivo):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(archivo).convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self):
+        pass
+
+class tesoro(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+        pygame.sprite.Sprite.__init__(self)
+        im_puerta=Recortar('jungle1.png',32,32)
+        self.image = pim_puerta[5][5]
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -300,6 +313,25 @@ class Jugador(pygame.sprite.Sprite):
             self.dir=2
             self.vel=2
 
+        def reset(self):
+            self.ls_muros = None
+            self.ls_mod = None
+            self.ls_enem = None
+            self.ls_muere= None
+            self.ls_llaves= None
+            self.ls_puerta= None
+            self.ls_j = None
+            self.ls_u = None
+            self.ls_n = None
+            self.ls_g = None
+            self.ls_l = None
+            self.ls_e = None
+            self.vel = 2
+            self.choca = 0
+            self.vida = 100
+            self.n=0
+            self.llav = False
+
         def update(self):
             self.rect.x += self.cambiox
             ls_golpes = pygame.sprite.spritecollide(self, self.ls_muros, False)
@@ -466,7 +498,7 @@ if __name__ == '__main__':
    cen=[[3*n,15*n],[3*n,6*n],[6*n,5*n],[15*n,17*n],[4*n,15*n],[13*n,17*n],[10*n,9*n],
         [21*n,8*n],[15*n,2*n],[10*n,17*n],[30*n,15*n],[28*n,14*n],[5*n,9*n],[22*n,18*n],[18*n,11*n],[18*n,18*17],
         [22*n,12*n],[25*n,12*n],[27*n,19*n]]
-   print cen[1][1]
+
    enemigos = pygame.sprite.Group()
    for i in range(19):
        x = cen[i][0]
@@ -486,6 +518,7 @@ if __name__ == '__main__':
    font=pygame.font.Font(None,80)
    texto=font.render("GAME OVER",True,NEGRO)
    gano=font.render("Ganaste",True,NEGRO)
+   nivel2=font.render("NIVEL 2",True,BLANCO)
    pygame.display.flip()
    ganar=False
    fin= False
@@ -509,7 +542,7 @@ if __name__ == '__main__':
                   jp.direccion(4)
 
               if event.key ==pygame.K_f:
-                  fin=True
+
                   ganar=True
 
               if event.key ==pygame.K_p:
@@ -550,11 +583,62 @@ if __name__ == '__main__':
             time.sleep(3)
 
         if ganar:
-          fin=True
-          nivel1.Dibujar(pantalla)
+
           pantalla.blit(gano,[ALTO/2,300])
           pygame.display.flip()
           time.sleep(3)
+          pantalla.fill(NEGRO)
+          pantalla.blit(nivel2,[ALTO/2,300])
+          pygame.display.flip()
+          time.sleep(3)
+          ganar = False
+          pygame.init()
+          pantalla=pygame.display.set_mode([ANCHO+125,ALTO])
+
+          pantalla.blit(mensaje("Porcentaje de vida",20),[1023,180])
+          pantalla.blit(mensaje("100",50),[1050,300])
+
+          todos=pygame.sprite.Group()
+          muere = pygame.sprite.Group()
+          muros = pygame.sprite.Group()
+          puertas = pygame.sprite.Group()
+
+          nivel1 = Nivel('nivel1.map', muros, muere, puertas)
+          muros = nivel1.Muros_ls()
+          muere = nivel1.Muere_ls()
+          puertas = nivel1.Puerta_ls()
+          nivel1.Dibujar(pantalla)
+
+          jp=Jugador2(32,32)
+          todos.add(jp)
+          jp.ls_muros = muros
+
+          ts = pygame.sprite.Group()
+          t = tesoro(416,288)
+          ts.add(t)
+          todos.add(t)
+          jp.ls_tesoro = ts
+
+          n=32
+          cen=[[3*n,15*n],[3*n,6*n],[6*n,5*n],[15*n,17*n],[4*n,15*n],[13*n,17*n],[10*n,9*n],
+               [21*n,8*n],[15*n,2*n],[10*n,17*n],[30*n,15*n],[28*n,14*n],[5*n,9*n],[22*n,18*n],[18*n,11*n],[18*n,18*17],
+               [22*n,12*n],[25*n,12*n],[27*n,19*n]]
+
+          enemigos = pygame.sprite.Group()
+          for i in range(19):
+              x = cen[i][0]
+              y = cen[i][1]
+              e = Enemigo(1,1,1)
+              e.rect.x = x
+              e.rect.y = y
+              e.vel = 1
+              enemigos.add(e)
+              todos.add(e)
+              e.ls_muros = muros
+
+          jp.ls_enem = enemigos
+          jp.ls_muere = muere
+          jp.ls_puerta = puertas
 
       else:
         nivel1.Dibujar(pantalla)

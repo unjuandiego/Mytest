@@ -1,36 +1,37 @@
 [nivel]
-origen=im.png
+origen=jungle1.png
 alto=32
 ancho=32
 mapa=................................
-     .*############################$.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ._ssssssssssssssssssssssssssss!.
-     ./%%%%%%%%%%%%%%%%%%%%%%%%%%%%|.
+     .*#p###<#####p###########<####$.
+     ._spssssssssppsssspsssssssssss!.
+     ._sppssssspssps<pppssssssssss<!.
+     ._pssssssppsspssssppsspsssssss!.
+     ._ps<spppspsspsppppppppsssssss!.
+     ._psssspsspsspsssspssspsssssss!.
+     ._pppppsssssspsssssspspsssssss!.
+     ._psssssssspspsppppppppsssssss!.
+     ._s<ssssspspspspsss<ssssssssss!.
+     .<ssssppppppppspsssssssssss<ss!.
+     ._psssssssssssspsspsspppsssss<!.
+     ._spspppppppppsppppsspspppppss!.
+     ._sppspssssspsspssppppssss<pss!.
+     ._sspssssp<spspppspsspppspppss!.
+     ._pspsssspsspsspssppspsssps<ss!.
+     ._psps<spppppssp<ssssp<sspssss!.
+     ._pspsssspppppspppppspssspppps!.
+     ._ppssspsssspssssssssppsss<sps!.
+     ./%%%%%%%%%%%%<%%<%%%%%%%%%%p%|.
      ................................
 [.]
 nombre=bloque
-x=8
-y=14
+x=12
+y=2
 muro= si
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [s]
 nombre=selva
@@ -40,116 +41,119 @@ muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
-[,]
-nombre=puerta salida
-x=11
-y=13
-verdadera=False
-muro=no
-llave= si
-muere = no
-letra = no
 
 [;]
 nombre=puerta salida
-x=11
-y=13
+x=5
+y=5
 verdadera=True
 muro=no
 llave=si
 muere = no
 letra = no
+puerta= si
 
 [<]
 nombre=lava
-x=7
-y=8
+x=4
+y=5
 muro=no
 muere = si
 letra = no
 llave = no
+puerta= no
 
 [p]
 nombre=piedra
-x=2
-y=15
+x=8
+y=8
 muro=si
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [*]
 nombre=borde1
-x=8
+x=9
 y=13
 muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [#]
 nombre=borde2
-x=9
+x=10
 y=13
 muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [$]
 nombre=borde3
-x=10
+x=11
 y=13
 muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [!]
 nombre=borde4
-x=10
+x=11
 y=14
 muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [|]
 nombre=borde5
+x=11
+y=15
+muro=no
+muere = no
+letra = no
+llave = no
+puerta= no
+
+[%]
+nombre=borde6
 x=10
 y=15
 muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
-[%]
-nombre=borde6
+[/]
+nombre=borde7
 x=9
 y=15
 muro=no
 muere = no
 letra = no
 llave = no
-
-[/]
-nombre=borde7
-x=8
-y=15
-muro=no
-muere = no
-letra = no
-llave = no
+puerta= no
 
 [_]
 nombre=borde8
-x=8
+x=9
 y=14
 muro=no
 muere = no
 letra = no
 llave = no
+puerta= no
 
 [r]
 nombre=rellen
@@ -159,3 +163,4 @@ muro=si
 muere = si
 letra = no
 llave = no
+puerta= no
