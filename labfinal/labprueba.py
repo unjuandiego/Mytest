@@ -66,7 +66,6 @@ class Enemigo(pygame.sprite.Sprite):
             self.rect.right = m.rect.left
 
 class LLave(pygame.sprite.Sprite):
-    cogido = False
     def __init__(self,x,y,archivo):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(archivo).convert_alpha()
@@ -76,9 +75,7 @@ class LLave(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.cogido:
-            self.rect.x = 1050
-            self.rect.y = 400
+        pass
 
 class J(pygame.sprite.Sprite):
     def __init__(self,x,y,archivo):
@@ -91,11 +88,24 @@ class J(pygame.sprite.Sprite):
     def update(self):
         pass
 
+class puerta_n2(pygame.sprite.Sprite):
+    bloqueo = False
+    def __init__(self,x,y):
+        pygame.sprite.Sprite.__init__(self)
+        im_puerta=Recortar('jungle1.png',32,32)
+        self.image = im_puerta[5][5]
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self):
+        pass
+
 class tesoro(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
         im_puerta=Recortar('jungle1.png',32,32)
-        self.image = pim_puerta[5][5]
+        self.image = im_puerta[17][2]
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -313,25 +323,6 @@ class Jugador(pygame.sprite.Sprite):
             self.dir=2
             self.vel=2
 
-        def reset(self):
-            self.ls_muros = None
-            self.ls_mod = None
-            self.ls_enem = None
-            self.ls_muere= None
-            self.ls_llaves= None
-            self.ls_puerta= None
-            self.ls_j = None
-            self.ls_u = None
-            self.ls_n = None
-            self.ls_g = None
-            self.ls_l = None
-            self.ls_e = None
-            self.vel = 2
-            self.choca = 0
-            self.vida = 100
-            self.n=0
-            self.llav = False
-
         def update(self):
             self.rect.x += self.cambiox
             ls_golpes = pygame.sprite.spritecollide(self, self.ls_muros, False)
@@ -367,38 +358,51 @@ class Jugador(pygame.sprite.Sprite):
               self.choca = 1
 
             ls_chocapu = pygame.sprite.spritecollide(self,self.ls_puerta, False)
-            for ch in ls_chocapu:
-                if self.llav == True:
-                     self.chocha = 2
+            if self.llav == True:
+             for ch in ls_chocapu:
+               self.choca = 2
 
-            ls_chollave = pygame.sprite.spritecollide(self,self.ls_llaves, True)
+            ls_chollave = pygame.sprite.spritecollide(self,self.ls_llaves, False)
             for ch in ls_chollave:
-              self.llav = True
+                self.llav = True
+                for l in self.ls_llaves:
+                    l.rect.x, l.rect.y = 1060,100
 
-            ls_choj = pygame.sprite.spritecollide(self,self.ls_j, True)
+            ls_choj = pygame.sprite.spritecollide(self,self.ls_j, False)
             for ch in ls_choj:
                 self.n+=1
+                for l in self.ls_j:
+                    l.rect.x, l.rect.y = 1060,400
 
-            ls_chou = pygame.sprite.spritecollide(self,self.ls_u, True)
+            ls_chou = pygame.sprite.spritecollide(self,self.ls_u, False)
             for ch in ls_chou:
                 self.n+=1
+                for l in self.ls_u:
+                    l.rect.x, l.rect.y = 1060,440
 
-
-            ls_chon = pygame.sprite.spritecollide(self,self.ls_n, True)
+            ls_chon = pygame.sprite.spritecollide(self,self.ls_n, False)
             for ch in ls_chon:
                 self.n+=1
+                for l in self.ls_n:
+                    l.rect.x, l.rect.y = 1060,480
 
-            ls_chog = pygame.sprite.spritecollide(self,self.ls_g, True)
+            ls_chog = pygame.sprite.spritecollide(self,self.ls_g, False )
             for ch in ls_chog:
                 self.n+=1
+                for l in self.ls_g:
+                    l.rect.x, l.rect.y = 1060,520
 
-            ls_chol = pygame.sprite.spritecollide(self,self.ls_l, True)
+            ls_chol = pygame.sprite.spritecollide(self,self.ls_l, False)
             for ch in ls_chol:
                 self.n+=1
+                for l in self.ls_l:
+                    l.rect.x, l.rect.y = 1060,560
 
-            ls_choe = pygame.sprite.spritecollide(self,self.ls_e, True)
+            ls_choe = pygame.sprite.spritecollide(self,self.ls_e, False )
             for ch in ls_choe:
                 self.n+=1
+                for l in self.ls_e:
+                    l.rect.x, l.rect.y = 1060,600
 
             if self.n==6:
                 self.choca=2
@@ -423,6 +427,113 @@ class Jugador(pygame.sprite.Sprite):
                 self.cambiox = 4
                 self.cambioy= 0
 
+class Jugador2(pygame.sprite.Sprite):
+        ls_muros = None
+        ls_enem = None
+        ls_muere= None
+        ls_puerta= None
+        ls_tesoro = None
+        ls_puerta1 = None
+        vel = 2
+        choca = 0
+        abrir = 0
+        vida = 100
+        n=0
+
+        def __init__(self, x , y):
+            pygame.sprite.Sprite.__init__(self)
+            im_player=Recortar('jugador.png',28,28)
+            self.image = im_player[0][0]
+            self.rect = self.image.get_rect()
+            self.rect.x = x
+            self.rect.y = y
+            self.cambiox = 0
+            self.cambioy = 0
+            self.con=0
+            self.dir=2
+            self.vel=2
+
+
+        def update(self):
+            self.rect.x += self.cambiox
+            ls_golpes = pygame.sprite.spritecollide(self, self.ls_muros, False)
+            for m in ls_golpes:
+                if self.cambiox > 0:
+                    self.rect.right = m.rect.left
+                else:
+                    self.rect.left = m.rect.right
+
+            self.rect.y += self.cambioy
+            ls_golpes = pygame.sprite.spritecollide(self, self.ls_muros, False)
+            for m in ls_golpes:
+                if self.cambioy > 0:
+                    self.rect.bottom = m.rect.top
+                else:
+                    self.rect.top = m.rect.bottom
+
+            #---------------------------------CHOCA ENEMIGO-----------------------
+            ls_choca = pygame.sprite.spritecollide(self, self.ls_enem, False)
+            for ch in ls_choca:
+                if(self.vida >= 0 ):
+                    self.vida -= 0.8
+                    pygame.draw.rect(pantalla, NEGRO, [1030, 250, 1140, 300])
+                    pantalla.blit(mensaje(str(self.vida),50),[1050,300])
+                    pygame.display.flip()
+                else:
+                    pygame.draw.rect(pantalla, NEGRO, [1030, 250, 1140, 300])
+                    self.choca = 1
+
+
+            ls_chocamu = pygame.sprite.spritecollide(self,self.ls_muere, False)
+            for ch in ls_chocamu:
+              self.choca = 1
+
+            ls_chocapu = pygame.sprite.spritecollide(self,self.ls_puerta1, False)
+            for ch in ls_chocapu:
+                for puertica in self.ls_puerta1:
+                    if puertica.bloqueo==False:
+                        if self.cambioy > 0:
+                           self.rect.bottom = puertica.rect.top
+                        else:
+                           self.rect.top = puertica.rect.bottom
+                    if puertica.bloqueo==True:
+                        pygame.sprite.spritecollide(self,self.ls_puerta1, True)
+
+                if self.n == 4:
+                     for puertica in self.ls_puerta1:
+                         puertica.bloqueo = True
+
+
+
+
+            ls_chots = pygame.sprite.spritecollide(self,self.ls_tesoro, True)
+            for ch in ls_chots:
+                self.n+=1
+
+            ls_chocapu = pygame.sprite.spritecollide(self,self.ls_puerta, False)
+            for ch in ls_chocapu:
+                self.choca = 2
+
+
+
+        def direccion(self,pos):
+            im_player=Recortar('jugador.png',28,28)
+            if pos == 1:
+                self.image = im_player[0][3]
+                self.cambioy = -4
+                self.cambiox = 0
+            if pos == 2:
+                self.image = im_player[0][0]
+                self.cambioy = 4
+                self.cambiox = 0
+            if pos == 3:
+                self.image = im_player[0][1]
+                self.cambiox = -4
+                self.cambioy = 0
+            if pos == 4:
+                self.image = im_player[0][2]
+                self.cambiox = 4
+                self.cambioy= 0
 if __name__ == '__main__':
    pygame.init()
    pantalla=pygame.display.set_mode([ANCHO+125,ALTO])
@@ -586,11 +697,11 @@ if __name__ == '__main__':
 
           pantalla.blit(gano,[ALTO/2,300])
           pygame.display.flip()
-          time.sleep(3)
+          time.sleep(1)
           pantalla.fill(NEGRO)
           pantalla.blit(nivel2,[ALTO/2,300])
           pygame.display.flip()
-          time.sleep(3)
+          time.sleep(1)
           ganar = False
           pygame.init()
           pantalla=pygame.display.set_mode([ANCHO+125,ALTO])
@@ -613,13 +724,24 @@ if __name__ == '__main__':
           todos.add(jp)
           jp.ls_muros = muros
 
+
           ts = pygame.sprite.Group()
-          t = tesoro(416,288)
+          t = puerta_n2(448,288)
           ts.add(t)
           todos.add(t)
-          jp.ls_tesoro = ts
+          jp.ls_puerta1 = ts
 
           n=32
+          tesoros = pygame.sprite.Group()
+          list_tesoros=[[5*n,6*n],[10*n,14*n],[23*n,15*n],[16*n,12*n]]
+          for i in range(4):
+              x = list_tesoros[i][0]
+              y = list_tesoros[i][1]
+              tr= tesoro(x,y)
+              tesoros.add(tr)
+              todos.add(tr)
+          jp.ls_tesoro=tesoros
+
           cen=[[3*n,15*n],[3*n,6*n],[6*n,5*n],[15*n,17*n],[4*n,15*n],[13*n,17*n],[10*n,9*n],
                [21*n,8*n],[15*n,2*n],[10*n,17*n],[30*n,15*n],[28*n,14*n],[5*n,9*n],[22*n,18*n],[18*n,11*n],[18*n,18*17],
                [22*n,12*n],[25*n,12*n],[27*n,19*n]]
