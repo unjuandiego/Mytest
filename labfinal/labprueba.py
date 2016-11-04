@@ -3,6 +3,7 @@ import ConfigParser
 from lib import *
 import random
 import time
+from bresenham import *
 
 ANCHO=1020
 ALTO=670
@@ -29,6 +30,38 @@ def mensaje(msj,n):
     font=pygame.font.Font(None,n)
     texto=font.render(msj,True,BLANCO)
     return texto
+
+class Enemigo2(pygame.sprite.Sprite):
+    ls_muros=None
+    movimientos = []
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        im_enemigo=Recortar('enemigo.png',28,28)
+        self.image = im_enemigo[9][0]
+        self.rect = self.image.get_rect()
+        self.vel = 0
+        self.t=100
+        self.arriba = False
+        self.rect.x = x
+        self.rect.y = y
+        self.cambiox = 0
+        self.cambioy = 0
+    def update(self):
+        x1=0
+        y1=0
+        self.movimientos = bresenham([self.rect.x,self.rect.y],[Jugador2.ls_mov[0],Jugador2.ls_mov[1]])
+        for pos in self.movimientos.path:
+        	x1 = pos[0]
+        	y1 = pos[1]
+        print x1,y1
+        self.rect.x = x1
+        self.rect.y = y1
+            #self.cambiox = x1
+
+        #Esta es por si los enemigos aparecen metidos dentro de los muros
+        ls_golpes = pygame.sprite.spritecollide(self, self.ls_muros, False)
+        for m in ls_golpes:
+            self.rect.right = m.rect.left
 
 class Enemigo(pygame.sprite.Sprite):
     ls_muros=None
@@ -434,6 +467,8 @@ class Jugador2(pygame.sprite.Sprite):
         ls_puerta= None
         ls_tesoro = None
         ls_puerta1 = None
+        ls_enem2 = None
+        ls_mov=[0,0]
         vel = 2
         choca = 0
         abrir = 0
@@ -455,6 +490,7 @@ class Jugador2(pygame.sprite.Sprite):
 
 
         def update(self):
+
             self.rect.x += self.cambiox
             ls_golpes = pygame.sprite.spritecollide(self, self.ls_muros, False)
             for m in ls_golpes:
@@ -522,18 +558,34 @@ class Jugador2(pygame.sprite.Sprite):
                 self.image = im_player[0][3]
                 self.cambioy = -4
                 self.cambiox = 0
+                self.ls_mov =[self.rect.x,self.rect.y]
+                #print self.ls_mov
+                self.ls_mov=[]
+                Enemigo2.movimientos = []
             if pos == 2:
                 self.image = im_player[0][0]
                 self.cambioy = 4
                 self.cambiox = 0
+                self.ls_mov =[self.rect.x,self.rect.y]
+                print self.ls_mov
+                self.ls_mov=[]
+                Enemigo2.movimientos = []
             if pos == 3:
                 self.image = im_player[0][1]
                 self.cambiox = -4
                 self.cambioy = 0
+                self.ls_mov =[self.rect.x,self.rect.y]
+                #print self.ls_mov
+                self.ls_mov=[]
+                Enemigo2.movimientos = []
             if pos == 4:
                 self.image = im_player[0][2]
                 self.cambiox = 4
                 self.cambioy= 0
+                self.ls_mov =[self.rect.x,self.rect.y]
+                #print self.ls_mov
+                self.ls_mov=[]
+                Enemigo2.movimientos = []
 if __name__ == '__main__':
    pygame.init()
    pantalla=pygame.display.set_mode([ANCHO+125,ALTO])
@@ -757,7 +809,14 @@ if __name__ == '__main__':
               enemigos.add(e)
               todos.add(e)
               e.ls_muros = muros
-
+          enemigo_f = pygame.sprite.Group()
+          en=Enemigo2()
+          en.rect.x = 950
+          en.rect.y = 96
+          enemigo_f.add(en)
+          todos.add(en)
+          en.ls_muros = muros
+          jp.ls_enem2 = enemigo_f
           jp.ls_enem = enemigos
           jp.ls_muere = muere
           jp.ls_puerta = puertas
